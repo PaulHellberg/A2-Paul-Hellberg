@@ -6,12 +6,12 @@ import edu.cmu.ri.createlab.terk.robot.finch.Finch;
 
 public class TaskManager {
 
-	private String hex; // user input value
-	private int dec; // decimal value to be converted from input
-	private String binary; // binary String to be converted from decimal
-	private Finch finch; // the Finch to use
-	int speedometer; // Store the speed value
-	int[] rgb; // Store the RGB values in an array
+	private String hex; // hexadecimal
+	private int dec; // decimal
+	private String binary; // binary stores a string of 0 and 1
+	private Finch finch; // Finch object
+	int speedometer; // robot's speed
+	int[] rgb; // rgb[0] for red, rgb[1] for green, and rgb[2] for blue
 
 	public TaskManager(String hex) {
 		this.hex = hex;
@@ -23,25 +23,24 @@ public class TaskManager {
 	}
 	
 	/**
-	 *Get the decimal value.
-	 * @return the decimal value
+	 *Getter for the decimal value.
+	 * @return an integer as the decimal value
 	 */
 	private int getDec() {
 		return this.dec;
 	}
 	
 	/**
-	 *Get the decimal's binary format.
-	 * @return the binary format
+	 *Getter for decimal's binary equivalent
+	 * @return a String as the binary format
 	 */
 	private String getBinary() {
 		return this.binary;
 	}
 	
-	/**
-	 *Get the right speed.
-	 *If the decimal is less than 80, it will return the decimal +30;
-	 *Else, the actual decimal value.
+	/*
+	 *SpeedManager returns robot's speed
+	 *Decimal +30 - if decimal is less than 80
 	 */
 	private int speedManager() {
 		if(getDec()<80) {
@@ -51,8 +50,8 @@ public class TaskManager {
 	}
 	
 	/**
-	 *Get and compute RGB values.
-	 * @return RGB values in an array of length 3; each position from 0 to 2 has red, green and blue values, in order;
+	 *RGBManager for each of the RGB values.
+	 * @return Red at [0], Green at [1], Blue at [2]
 	 */
 	private int[] RGBManager() {
 		int red, green, blue;
@@ -76,7 +75,7 @@ public class TaskManager {
 		finch.setLED(this.rgb[0], this.rgb[1], this.rgb[2]);
 		
 		for(int i=0; i<getBinary().length(); i++) {
-			if(getBinary().charAt(i) == '0') {
+			if(getBinary().charAt(i) == '0') { //getBinary() returns a string, each character is either 0 or 1
 				finch.setWheelVelocities(-speedometer, -speedometer, 2000); // Set finch's speed to negative to move backwards
 			} else {
 				finch.setWheelVelocities(+speedometer, +speedometer, 2000); // Set the finch's speed to positive to move forward

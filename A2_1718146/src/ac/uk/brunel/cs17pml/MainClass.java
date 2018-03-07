@@ -4,11 +4,17 @@ import javax.swing.JOptionPane;
 
 public class MainClass {
 	
+	/*
+	 *First method to be executed
+	 **/
 	public static void main(String[] args0) {
 		JOptionPane.showMessageDialog(null, "The program will now begin...", "Startup", JOptionPane.INFORMATION_MESSAGE);
 		input();
 	}
 	
+	/**
+	 *Input is called recursively if any values given by user are not valid
+	 */
 	private static void input() {
 		String result = JOptionPane.showInputDialog(null, "Please type a Hexadecimal value to start... ", "Awating for input... ", JOptionPane.PLAIN_MESSAGE);
 		// If the user presses cancel or closes the form, the input will be null so the program terminates
@@ -20,7 +26,7 @@ public class MainClass {
 			JOptionPane.showMessageDialog(null, "It must have exactly 2 characters of\n"
 					+ "(a) positive digits\n"
 					+ "(b) characters from A-F lower or uppercase", "Invalid Input Error", JOptionPane.WARNING_MESSAGE);
-			input(); // input() method call to ask for input again
+			input(); // attempt for new input by recursive call
 		}
 	}
 }
